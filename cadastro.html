@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="style.css">
+
+        <title>Bootstrap</title>
+    </head>
+    <body class="d-flex aling-items-center py-4">
+
+        <!-- Área do Formulário-->
+        <main class="w-100 m-auto container-cadastro">
+            
+            <!--Formulário 16 á 71-->
+            <form>
+                <h1 class="h2 mb-3 font-weight-bold text-center">Cadastro</h1>
+
+                <!--Preenchimento de nome-->
+                <div class="form-floating">
+                    <label for="floatingInput">Nome</label>
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu nome completo" required>
+                </div> 
+
+                <!--Confirmação de Matrícula-->
+                <div class="form-floating mt-4">
+                    <label for="floatingInput">Matrícula</label>
+                    <input type="number" class="form-control" id="floatingInput" placeholder="Digite sua matrícula" required>
+                </div> 
+
+                <!--Preenchimento de email-->
+                <div class="form-floating mt-4">
+                    <label for="floatingInput">Endereço de email</label>
+                    <input type="email" class="form-control" id="floatingInput" placeholder="Digite seu Email" required>
+                </div> 
+                
+                <!--Preenchimento de senha-->
+                <div class="form-floating mt-4">
+                    <label for="floatingInput">Senha</label>
+                    <input type="password" class="form-control" id="floatingInput" placeholder="Digite sua senha" required>
+                </div>
+
+                <!--Confirmação de senha-->
+                <div class="form-floating mt-4">
+                    <label for="floatingInput">Confirme sua senha</label>
+                    <input type="password" class="form-control" id="floatingInput" placeholder="Digite sua senha" required>
+                </div>
+
+                <!--Seleção de Cargo-->
+                <div class="form-floating mt-4">
+                    <select class="custom-select" id="selecionarCargo" required>
+                        <option selected disabled>Escolha seu cargo atual</option>
+                        <option value="1">Vendas</option>
+                        <option value="2">Contabilidade</option>
+                        <option value="3">Rh</option>
+                        <option value="3">Multimídia</option>
+                        <option value="3">TI</option>
+                    </select>
+                </div>
+
+                <!--Seleção de Usuário-->
+                <div class="form-floating mt-4">
+                    <select class="custom-select" id="selecionarUsuário" required>
+                        <option selected disabled>Você é um...</option>
+                        <option value="1">Funcionário</option>
+                        <option value="2">Administrador</option>
+                    </select>
+                </div>
+
+                <!--Botão de enviar os dados e ter acesso á página pricipal-->
+                <div>
+                    <a href="login.html" class="btn btn-primary mt-4 w-100 py-2 font-weight-bold" role="button" aria-pressed="true">Cadastrar</a>
+                </div> 
+            </form>
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+
+    </body>
+</html>
