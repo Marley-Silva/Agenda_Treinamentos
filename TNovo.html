@@ -29,48 +29,94 @@
 
         <!-- Área do Formulário -->
         <main class="container my-5">
-            <form>
+            <form id="treinoForm" novalidate>
                 <h2 class="mb-4 text-primary fw-bold text-center">Adicionar Treinamento</h2>
 
                 <!-- Título -->
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título</label>
                     <input type="text" class="form-control" id="titulo" placeholder="Digite o nome do treinamento" required>
+                    <div class="invalid-feedback">Por favor, informe o título.</div>
                 </div>
 
                 <!-- Data -->
                 <div class="mb-3">
                     <label for="data" class="form-label">Data</label>
                     <input type="date" class="form-control" id="data" required>
+                    <div class="invalid-feedback">Por favor, informe a data.</div>
                 </div>
 
                 <!-- Horário -->
                 <div class="mb-3">
                     <label for="horario" class="form-label">Horário</label>
                     <input type="time" class="form-control" id="horario" required>
+                    <div class="invalid-feedback">Por favor, informe o horário.</div>
                 </div>
 
                 <!-- Instrutor -->
                 <div class="mb-3">
                     <label for="instrutor" class="form-label">Instrutor</label>
                     <input type="text" class="form-control" id="instrutor" placeholder="Digite o nome do instrutor(a)" required>
+                    <div class="invalid-feedback">Por favor, informe o instrutor.</div>
                 </div>
 
                 <!-- Tipo -->
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
                     <select name="tipo" id="tipo" class="form-select">
-                        <option value="selecionar" selected disabled>Selecione o tipo</option>
+                        <option value="" selected disabled>Selecione o tipo</option>
                         <option value="interno">Interno</option>
                         <option value="externo">Externo</option>
                     </select>
+                    <div class="invalid-feedback">Por favor, selecione o tipo.</div>
                 </div>
 
                 <!-- Botão de enviar os dados -->
                 <div>
-                    <a href="index.html" class="btn btn-primary mt-3 w-100 py-2 fw-bold" role="button" aria-pressed="true">Adicionar</a>
+                    <button type="submit" id="btnAdicionar" class="btn btn-primary mt-3 w-100 py-2 fw-bold">Adicionar</button>
                 </div>
             </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const form = document.getElementById('treinoForm');
+                    const titulo = document.getElementById('titulo');
+                    const data = document.getElementById('data');
+                    const horario = document.getElementById('horario');
+                    const instrutor = document.getElementById('instrutor');
+                    const tipo = document.getElementById('tipo');
+
+                    function markInvalid(el) {
+                        el.classList.add('is-invalid');
+                        const label = document.querySelector('label[for="' + el.id + '"]');
+                        if (label) label.classList.add('text-danger');
+                    }
+
+                    function markValid(el) {
+                        el.classList.remove('is-invalid');
+                        const label = document.querySelector('label[for="' + el.id + '"]');
+                        if (label) label.classList.remove('text-danger');
+                    }
+
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        let valid = true;
+
+                        // reset
+                        [titulo, data, horario, instrutor, tipo].forEach(el => markValid(el));
+
+                        if (!titulo.value.trim()) { valid = false; markInvalid(titulo); }
+                        if (!data.value) { valid = false; markInvalid(data); }
+                        if (!horario.value) { valid = false; markInvalid(horario); }
+                        if (!instrutor.value.trim()) { valid = false; markInvalid(instrutor); }
+                        if (!tipo.value) { valid = false; markInvalid(tipo); }
+
+                        if (valid) {
+                            // aqui você pode enviar os dados ao servidor (fetch). Por enquanto, redireciona para home.
+                            window.location.href = 'homeAdmin.html';
+                        }
+                    });
+                });
+            </script>
         </main>
 
         <!--Rodapé-->

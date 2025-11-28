@@ -16,65 +16,139 @@
         <main class="w-100 m-auto container-cadastro">
             
             <!--Formulário 16 á 71-->
-            <form>
+            <form id="cadastroForm" novalidate>
+                <img src="Imgs/persona.png" alt="Imagem de uma persona" class="mb-4 img-fluid rounded mx-auto d-block" height="72" width="72">
                 <h1 class="h2 mb-3 font-weight-bold text-center">Cadastro</h1>
 
                 <!--Preenchimento de nome-->
-                <div class="form-floating">
-                    <label for="floatingInput">Nome</label>
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Digite seu nome completo" required>
-                </div> 
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
 
                 <!--Confirmação de Matrícula-->
-                <div class="form-floating mt-4">
-                    <label for="floatingInput">Matrícula</label>
-                    <input type="number" class="form-control" id="floatingInput" placeholder="Digite sua matrícula" required>
-                </div> 
+                <div class="form-group mt-3">
+                    <label for="matricula">Matrícula</label>
+                    <input type="number" class="form-control" id="matricula" placeholder="Digite sua matrícula" required>
+                </div>
 
                 <!--Preenchimento de email-->
-                <div class="form-floating mt-4">
-                    <label for="floatingInput">Endereço de email</label>
-                    <input type="email" class="form-control" id="floatingInput" placeholder="Digite seu Email" required>
-                </div> 
+                <div class="form-group mt-3">
+                    <label for="email">Endereço de email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Digite seu Email" required>
+                </div>
                 
                 <!--Preenchimento de senha-->
-                <div class="form-floating mt-4">
-                    <label for="floatingInput">Senha</label>
-                    <input type="password" class="form-control" id="floatingInput" placeholder="Digite sua senha" required>
+                <div class="form-group mt-3">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" id="senha" placeholder="Digite uma senha de 6 digitos" required>
                 </div>
 
                 <!--Confirmação de senha-->
-                <div class="form-floating mt-4">
-                    <label for="floatingInput">Confirme sua senha</label>
-                    <input type="password" class="form-control" id="floatingInput" placeholder="Digite sua senha" required>
+                <div class="form-group mt-3">
+                    <label for="confirmSenha">Confirme sua senha</label>
+                    <input type="password" class="form-control" id="confirmSenha" placeholder="Digite sua senha" required>
                 </div>
 
                 <!--Seleção de Cargo-->
-                <div class="form-floating mt-4">
+                <div class="form-group mt-3">
+                    <label for="selecionarCargo">Cargo</label>
                     <select class="custom-select" id="selecionarCargo" required>
-                        <option selected disabled>Escolha seu cargo atual</option>
-                        <option value="1">Vendas</option>
-                        <option value="2">Contabilidade</option>
-                        <option value="3">Rh</option>
-                        <option value="3">Multimídia</option>
-                        <option value="3">TI</option>
+                        <option value="" selected disabled>Escolha seu cargo atual</option>
+                        <option value="Vendas">Vendas</option>
+                        <option value="Contabilidade">Contabilidade</option>
+                        <option value="Rh">Rh</option>
+                        <option value="Multimidia">Multimídia</option>
+                        <option value="TI">TI</option>
                     </select>
                 </div>
 
                 <!--Seleção de Usuário-->
-                <div class="form-floating mt-4">
-                    <select class="custom-select" id="selecionarUsuário" required>
-                        <option selected disabled>Você é um...</option>
-                        <option value="1">Funcionário</option>
-                        <option value="2">Administrador</option>
+                <div class="form-group mt-3">
+                    <label for="selecionarUsuario">Você é um...</label>
+                    <select class="custom-select" id="selecionarUsuario" required>
+                        <option value="" selected disabled>Escolha uma opção</option>
+                        <option value="Funcionario">Funcionário</option>
+                        <option value="Administrador">Administrador</option>
                     </select>
                 </div>
 
                 <!--Botão de enviar os dados e ter acesso á página pricipal-->
                 <div>
-                    <a href="login.html" class="btn btn-primary mt-4 w-100 py-2 font-weight-bold" role="button" aria-pressed="true">Cadastrar</a>
-                </div> 
+                    <button type="submit" id="btnCadastrar" class="btn btn-primary mt-4 w-100 py-2 font-weight-bold">Cadastrar</button>
+                </div>
             </form>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const form = document.getElementById('cadastroForm');
+
+                    function validateEmail(email) {
+                        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        return re.test(email);
+                    }
+
+                    form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        let valid = true;
+
+                        // elementos
+                        const nome = document.getElementById('nome');
+                        const matricula = document.getElementById('matricula');
+                        const email = document.getElementById('email');
+                        const senha = document.getElementById('senha');
+                        const confirmSenha = document.getElementById('confirmSenha');
+                        const selecionarCargo = document.getElementById('selecionarCargo');
+                        const selecionarUsuario = document.getElementById('selecionarUsuario');
+
+                        // resetar estilos
+                        [nome, matricula, email, senha, confirmSenha].forEach(i => i.classList.remove('is-invalid'));
+                        document.querySelectorAll('#cadastroForm label').forEach(l => l.classList.remove('text-danger'));
+
+                        // validações básicas
+                        if (!nome.value.trim()) {
+                            valid = false;
+                            document.querySelector('label[for="nome"]').classList.add('text-danger');
+                        }
+
+                        if (!matricula.value.trim()) {
+                            valid = false;
+                            document.querySelector('label[for="matricula"]').classList.add('text-danger');
+                        }
+
+                        if (!validateEmail(email.value.trim())) {
+                            valid = false;
+                            document.querySelector('label[for="email"]').classList.add('text-danger');
+                        }
+
+                        if (!senha.value || senha.value.length < 6) {
+                            valid = false;
+                            document.querySelector('label[for="senha"]').classList.add('text-danger');
+                        }
+
+                        if (confirmSenha.value !== senha.value) {
+                            valid = false;
+                            document.querySelector('label[for="confirmSenha"]').classList.add('text-danger');
+                        }
+
+                        if (!selecionarCargo.value) {
+                            valid = false;
+                            document.querySelector('label[for="selecionarCargo"]').classList.add('text-danger');
+                        }
+
+                        if (!selecionarUsuario.value) {
+                            valid = false;
+                            document.querySelector('label[for="selecionarUsuario"]').classList.add('text-danger');
+                        }
+
+                        if (valid) {
+                            // Se desejar, aqui vai a chamada ao servidor (fetch) para cadastrar.
+                            // Por enquanto, segue para a página principal (index).
+                            window.location.href = 'index.html';
+                        }
+                    });
+                });
+            </script>
         </main>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
